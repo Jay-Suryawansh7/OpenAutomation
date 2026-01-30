@@ -1,0 +1,66 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Render Blueprint (Infrastructure as Code)
+# Deploy this service to Render.com
+# ═══════════════════════════════════════════════════════════════════════════════
+# 
+# Usage:
+# 1. Connect your GitHub repo to Render
+# 2. Render will auto-detect this file and configure the service
+# 3. Set the environment variables in Render dashboard
+#
+# Docs: https://render.com/docs/blueprint-spec
+# ═══════════════════════════════════════════════════════════════════════════════
+
+services:
+  - type: web
+    name: instagram-automation-api
+    runtime: node
+    region: oregon  # Free tier region
+    
+    # Repository settings (auto-detected from GitHub connection)
+    # repo: https://github.com/your-username/your-repo
+    rootDir: server  # If your backend is in a subdirectory
+    
+    # Build & Start
+    buildCommand: npm install
+    startCommand: node server.js
+    
+    # Instance type (free tier)
+    plan: free
+    
+    # Health check
+    healthCheckPath: /health
+
+    # Environment variables (values set in Render dashboard)
+    envVars:
+      - key: NODE_ENV
+        value: production
+      
+      - key: PORT
+        value: 3001
+      
+      # App URL for keep-alive self-ping (set after first deploy)
+      - key: APP_URL
+        sync: false  # Set manually in dashboard after deploy
+      
+      # Database (Neon PostgreSQL)
+      - key: DATABASE_URL
+        sync: false  # Set manually - contains sensitive credentials
+      
+      # Clerk Authentication
+      - key: CLERK_SECRET_KEY
+        sync: false  # Set manually - sensitive
+      
+      # Meta/Instagram API
+      - key: META_APP_SECRET
+        sync: false  # Set manually - sensitive
+      
+      - key: META_VERIFY_TOKEN
+        sync: false  # Set manually - your custom verify token
+      
+      - key: IG_ACCESS_TOKEN
+        sync: false  # Set manually - sensitive
+      
+      # Client URL (for CORS)
+      - key: CLIENT_URL
+        sync: false  # Set to your frontend URL
