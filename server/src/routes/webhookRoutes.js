@@ -30,8 +30,9 @@ router.get('/', (req, res) => {
     if (mode === 'subscribe' && token === process.env.META_VERIFY_TOKEN) {
         console.log('✅ Webhook verified successfully!');
 
-        // Respond with the challenge integer to confirm subscription
-        return res.status(200).send(parseInt(challenge));
+        // Respond with the challenge to confirm subscription
+        // Meta expects the challenge echoed back as the response body
+        return res.status(200).send(challenge);
     }
 
     // Verification failed
