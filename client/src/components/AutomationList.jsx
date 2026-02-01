@@ -2,7 +2,7 @@ import AutomationCard from './AutomationCard';
 import Pagination from './Pagination';
 import { PackageOpen } from 'lucide-react';
 
-const AutomationList = ({ automations, loading, currentPage, totalPages }) => {
+const AutomationList = ({ automations, loading, currentPage, totalPages, onCreateClick }) => {
     if (loading) {
         return (
             <div className="bg-white border border-gray-100 rounded-[8px] p-8 space-y-4">
@@ -29,7 +29,10 @@ const AutomationList = ({ automations, loading, currentPage, totalPages }) => {
                 <p className="text-gray-500 max-w-sm mb-6">
                     Try adjusting your filters or create a new automation to get started.
                 </p>
-                <button className="bg-[#1F2937] text-white px-4 py-2 rounded-[6px] text-sm font-medium">
+                <button
+                    onClick={onCreateClick}
+                    className="bg-[#1F2937] text-white px-4 py-2 rounded-[6px] text-sm font-medium hover:bg-gray-800 transition-colors"
+                >
                     Create Automation
                 </button>
             </div>

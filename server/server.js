@@ -9,6 +9,7 @@ const axios = require('axios');
 const healthRoutes = require('./src/routes/health.routes');
 const webhookRoutes = require('./src/routes/webhookRoutes');
 const automationRoutes = require('./src/routes/automation.routes');
+const instagramRoutes = require('./src/routes/instagram.routes');
 
 // Import middleware
 const { errorHandler } = require('./src/middleware/errorHandler');
@@ -70,6 +71,7 @@ app.use(clerkAuthMiddleware);
 // ─────────────────────────────────────────────────────────────────────────────
 app.use('/api/health', healthRoutes);
 app.use('/api/automations', automationRoutes);
+app.use('/api/instagram', instagramRoutes);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Error Handling
